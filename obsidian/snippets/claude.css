@@ -1,0 +1,552 @@
+@charset "UTF-8";
+/* ============================================================
+   Claude Style — Obsidian CSS Snippet
+   温暖、克制、有呼吸感的阅读与写作环境
+   ============================================================ */
+
+/* ── 全局色彩系统 ─────────────────────────────────────────── */
+.theme-light {
+  --background-primary:         #FAF8F5;
+  --background-primary-alt:     #F4F1EC;
+  --background-secondary:       #EDE9E1;
+  --background-secondary-alt:   #E6E1D6;
+  --background-modifier-border: #D8D2C6;
+
+  --text-normal:       #2C2B27;
+  --text-muted:        #7A7669;
+  --text-faint:        #A8A39A;
+
+  --interactive-accent:       #C67B2E;
+  --interactive-accent-hover: #A8631E;
+  --text-accent:              #C67B2E;
+  --text-accent-hover:        #A8631E;
+
+  --code-background:  #EDE9E1;
+  --code-normal:      #5C3B1E;
+}
+
+.theme-dark {
+  --background-primary:         #1E1C18;
+  --background-primary-alt:     #262420;
+  --background-secondary:       #2C2923;
+  --background-secondary-alt:   #342F28;
+  --background-modifier-border: #3E382F;
+
+  --text-normal:       #E8E4DC;
+  --text-muted:        #8C877D;
+  --text-faint:        #5E5951;
+
+  --interactive-accent:       #D4924B;
+  --interactive-accent-hover: #E0A85E;
+  --text-accent:              #D4924B;
+  --text-accent-hover:        #E0A85E;
+
+  --code-background:  #272420;
+  --code-normal:      #D4B896;
+}
+
+/* ── 字体排版 ─────────────────────────────────────────────── */
+body {
+  --font-text-theme:      "Georgia", "Noto Serif SC", serif;
+  --font-interface-theme: "Inter", "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-monospace-theme: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  --font-text-size:       17px;
+  --line-height-normal:   1.85;
+  --line-width:           700px;
+
+  /* Obsidian 内部实际使用的变量，--font-text-theme 仅作声明用途 */
+  --font-text:      var(--font-text-theme);
+  --font-ui:        var(--font-interface-theme);
+  --font-monospace: var(--font-monospace-theme);
+
+  font-family: var(--font-text-theme);
+  font-size:   var(--font-text-size);
+  line-height: var(--line-height-normal);
+}
+
+/* ── 编辑器正文 ──────────────────────────────────────────── */
+/* 阅读模式 */
+.markdown-rendered {
+  font-family:    var(--font-text-theme);
+  font-size:      var(--font-text-size);
+  line-height:    var(--line-height-normal);
+  color:          var(--text-normal);
+  letter-spacing: 0.01em;
+}
+
+/* 编辑模式 / Live Preview：CM6 编辑层需单独声明，不会从 body 自动继承 */
+.markdown-source-view.mod-cm6 .cm-content,
+.markdown-source-view.mod-cm6 .cm-line {
+  font-family:    var(--font-text-theme);
+  font-size:      var(--font-text-size);
+  line-height:    var(--line-height-normal);
+  color:          var(--text-normal);
+  letter-spacing: 0.01em;
+}
+
+/* Live Preview 中正文段落（非代码块、非标题）保持 serif */
+.markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-codeblock):not(.HyperMD-header) {
+  font-family: var(--font-text-theme);
+}
+
+/* 最大宽度居中 */
+.markdown-source-view .cm-sizer,
+.markdown-preview-view .markdown-preview-section {
+  max-width:      var(--line-width);
+  margin-inline:  auto;
+  padding-inline: 2rem;
+}
+
+/* ── 标题（阅读模式） ─────────────────────────────────────── */
+.markdown-rendered h1 { font-size: 1.8em;  font-weight: 600; letter-spacing: -0.02em; }
+.markdown-rendered h2 { font-size: 1.4em;  font-weight: 600; }
+.markdown-rendered h3 { font-size: 1.15em; font-weight: 600; }
+.markdown-rendered h4 { font-size: 1em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4 {
+  margin-top:    2em;
+  margin-bottom: 0.6em;
+  color:         var(--text-normal);
+  font-family:   var(--font-interface-theme);
+}
+
+.markdown-rendered h1 {
+  padding-bottom: 0.35em;
+  border-bottom:  1.5px solid var(--background-modifier-border);
+}
+
+/* ── 标题（编辑模式 / Live Preview，CM6 用 .HyperMD-header） ── */
+.markdown-source-view.mod-cm6 .HyperMD-header {
+  font-family: var(--font-interface-theme);
+  font-weight: 600;
+  color:       var(--text-normal);
+}
+.markdown-source-view.mod-cm6 .HyperMD-header-1 { font-size: 1.8em;  letter-spacing: -0.02em; }
+.markdown-source-view.mod-cm6 .HyperMD-header-2 { font-size: 1.4em; }
+.markdown-source-view.mod-cm6 .HyperMD-header-3 { font-size: 1.15em; }
+.markdown-source-view.mod-cm6 .HyperMD-header-4 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+
+/* ── 正文段落 ────────────────────────────────────────────── */
+.markdown-rendered p {
+  margin-bottom: 1.1em;
+}
+
+/* ── 无序列表 ────────────────────────────────────────────── */
+.markdown-rendered ul {
+  padding-left:  1.6em;
+  margin:        0.5em 0 1em;
+}
+
+.markdown-rendered ul > li {
+  margin-bottom: 0.28em;
+  line-height:   var(--line-height-normal);
+}
+
+/* 直接染色 marker，不接管渲染，编辑/阅读模式行为一致 */
+.markdown-rendered ul > li::marker {
+  color:     var(--interactive-accent);
+  font-size: 0.9em;
+}
+
+.markdown-rendered ul ul > li::marker {
+  color:     var(--interactive-accent);
+  font-size: 0.8em;
+  opacity:   0.6;
+}
+
+.markdown-rendered ul ul ul > li::marker {
+  color:     var(--text-faint);
+  font-size: 0.8em;
+}
+
+/* ── 有序列表 ────────────────────────────────────────────── */
+.markdown-rendered ol {
+  padding-left:  1.6em;
+  margin:        0.5em 0 1em;
+}
+
+.markdown-rendered ol > li {
+  margin-bottom: 0.28em;
+  line-height:   var(--line-height-normal);
+}
+
+.markdown-rendered ol > li::marker {
+  color:       var(--interactive-accent);
+  font-family: var(--font-interface-theme);
+  font-size:   0.85em;
+  font-weight: 600;
+}
+
+.markdown-rendered ol ol > li::marker {
+  color:       var(--text-muted);
+  font-weight: 500;
+}
+
+/* ── 列表内段落收紧 ──────────────────────────────────────── */
+.markdown-rendered li > p {
+  margin-bottom: 0.2em;
+}
+
+/* ── 编辑模式列表（有序 & 无序）────────────────────────────
+   Obsidian 默认给 HyperMD-list-line 加了 border-bottom 和多余
+   padding，导致列表项之间出现横线和过大间距，在此统一重置。    */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-list-line {
+  border-top:     none !important;
+  border-bottom:  none !important;
+  padding-top:    0.05em;
+  padding-bottom: 0.05em;
+  line-height:    var(--line-height-normal);
+}
+
+/* 有序列表编号：颜色 & 字体与阅读模式对齐 */
+.markdown-source-view.mod-cm6 .cm-formatting-list-ol {
+  color:       var(--interactive-accent);
+  font-family: var(--font-interface-theme);
+  font-weight: 600;
+  font-size:   0.88em;
+}
+
+/* 无序列表符号颜色 */
+.markdown-source-view.mod-cm6 .cm-formatting-list-ul {
+  color: var(--interactive-accent);
+}
+
+/* ── Task list / Checkbox ─────────────────────────────────── */
+.markdown-rendered input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance:    none;
+  width:         14px;
+  height:        14px;
+  border:        1.5px solid var(--background-modifier-border);
+  border-radius: 3px;
+  background:    transparent;
+  cursor:        pointer;
+  position:      relative;
+  top:           2px;
+  transition:    background 0.12s ease, border-color 0.12s ease;
+}
+.markdown-rendered input[type="checkbox"]:checked {
+  background:   var(--interactive-accent);
+  border-color: var(--interactive-accent);
+}
+.markdown-rendered input[type="checkbox"]:checked::after {
+  content:      "";
+  display:      block;
+  width:        4px;
+  height:       7px;
+  border:       2px solid #fff;
+  border-top:   none;
+  border-left:  none;
+  transform:    rotate(45deg) translate(1px, -1px);
+  margin:       0 auto;
+}
+.markdown-rendered .task-list-item.is-checked > p,
+.markdown-rendered .task-list-item.is-checked {
+  color:                 var(--text-faint);
+  text-decoration:       line-through;
+  text-decoration-color: var(--text-faint);
+}
+
+/* ── 粗体 / 斜体 ──────────────────────────────────────────── */
+.markdown-rendered strong { font-weight: 700; color: var(--text-normal); }
+.markdown-rendered em     { font-style: italic; color: var(--text-muted); }
+
+/* ── 链接 ─────────────────────────────────────────────────── */
+.markdown-rendered a,
+.markdown-rendered a.internal-link {
+  color:           var(--text-accent);
+  text-decoration: none;
+  border-bottom:   1px solid transparent;
+  transition:      border-color 0.15s ease, color 0.15s ease;
+}
+.markdown-rendered a:hover,
+.markdown-rendered a.internal-link:hover {
+  color:               var(--text-accent-hover);
+  border-bottom-color: var(--text-accent-hover);
+}
+
+/* ── 行内代码 ──────────────────────────────────────────────── */
+.markdown-rendered code,
+.cm-inline-code {
+  background:              var(--code-background);
+  color:                   var(--code-normal);
+  font-family:             var(--font-monospace-theme);
+  font-size:               0.86em;
+  padding:                 0.12em 0.42em;
+  border-radius:           4px;
+  border:                  1px solid var(--background-modifier-border);
+  font-variant-ligatures:  none;   /* 行内代码关闭连字，避免 -> != 变形 */
+  font-feature-settings:   "calt" 0;
+}
+/* 行内代码不继承 pre code 的透明背景 */
+.markdown-rendered pre code {
+  background:              transparent;
+  border:                  none;
+  padding:                 0;
+  font-variant-ligatures:  normal;  /* 代码块内可以保留连字（美观） */
+  font-feature-settings:   "calt" 1;
+}
+
+/* ── 代码块（阅读模式） ────────────────────────────────────── */
+.markdown-rendered pre {
+  background:    var(--code-background);
+  border:        1px solid var(--background-modifier-border);
+  border-left:   3px solid var(--interactive-accent);   /* 左侧 accent 条 */
+  border-radius: 8px;
+  padding:       1em 1.3em 1em 1.1em;
+  overflow-x:    auto;
+  font-size:     0.85em;
+  line-height:   1.72;
+  white-space:   pre-wrap;         /* 自动换行 */
+  word-break:    break-word;
+  overflow-wrap: break-word;
+  tab-size:      4;
+  position:      relative;
+}
+
+.markdown-rendered pre code {
+  font-size:     inherit;
+  color:         var(--code-normal);
+  font-family:   var(--font-monospace-theme);
+  white-space:   pre-wrap;
+  word-break:    break-word;
+  overflow-wrap: break-word;
+  tab-size:      4;
+  display:       block;
+}
+
+/* 阅读模式：有语言标注时，右上角显示语言名 */
+.markdown-rendered pre[class*="language-"]::after {
+  content:          attr(class);
+  position:         absolute;
+  top:              0.45em;
+  right:            0.75em;
+  font-family:      var(--font-interface-theme);
+  font-size:        0.72em;
+  color:            var(--text-faint);
+  letter-spacing:   0.04em;
+  pointer-events:   none;
+  user-select:      none;
+}
+
+/* ── 代码块（编辑模式 / Source Mode & Live Preview） ───────── */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock {
+  font-family:   var(--font-monospace-theme);
+  font-size:     0.85em;
+  line-height:   1.72;
+  color:         var(--code-normal);
+  white-space:   pre-wrap;         /* 编辑模式同样自动换行 */
+  word-break:    break-word;
+  overflow-wrap: break-word;
+  tab-size:      4;
+}
+
+/* 代码块主体背景 + 左侧 accent 条 */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-bg {
+  background:  var(--code-background);
+  border-left: 3px solid var(--interactive-accent);
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+/* 开始行（```language）— 作为 header 区域，背景略深 */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-begin-bg {
+  background:               var(--background-secondary-alt);
+  border:                   1px solid var(--background-modifier-border);
+  border-left:              3px solid var(--interactive-accent);
+  border-bottom:            none;
+  border-top-left-radius:   8px;
+  border-top-right-radius:  8px;
+}
+/* 开始行文字（语言名）用 interface 字体，颜色柔和 */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-begin {
+  font-family: var(--font-interface-theme);
+  font-size:   0.82em;
+  color:       var(--text-muted);
+  opacity:     0.85;
+}
+
+/* 结束行（```） */
+.markdown-source-view.mod-cm6 .HyperMD-codeblock-end-bg {
+  background:                  var(--background-secondary-alt);
+  border:                      1px solid var(--background-modifier-border);
+  border-left:                 3px solid var(--interactive-accent);
+  border-top:                  none;
+  border-bottom-left-radius:   8px;
+  border-bottom-right-radius:  8px;
+}
+
+/* Live Preview 模式中 callout 内嵌代码块同步 */
+.markdown-source-view.mod-cm6 .cm-embed-block.cm-callout pre {
+  white-space:   pre-wrap;
+  word-break:    break-word;
+  overflow-wrap: break-word;
+  tab-size:      4;
+}
+
+/* ── 引用块 ────────────────────────────────────────────────── */
+.markdown-rendered blockquote {
+  border-left: 3px solid var(--interactive-accent);
+  margin:      1.4em 0;
+  padding:     0.6em 0 0.6em 1.4em;
+  color:       var(--text-muted);
+  font-style:  italic;
+  background:  transparent;
+}
+.markdown-rendered blockquote p { margin: 0; }
+
+/* ── 水平分割线 ───────────────────────────────────────────── */
+.markdown-rendered hr {
+  border:     none;
+  border-top: 1px solid var(--background-modifier-border);
+  margin:     2.5em 0;
+  opacity:    0.8;
+}
+
+/* ── 表格 ──────────────────────────────────────────────────── */
+.markdown-rendered table {
+  border-collapse: collapse;
+  width:           100%;
+  margin:          1.5em 0;
+  font-size:       0.93em;
+}
+.markdown-rendered thead th {
+  border-bottom:  2px solid var(--background-modifier-border);
+  padding:        0.5em 0.8em;
+  text-align:     left;
+  font-family:    var(--font-interface-theme);
+  font-weight:    600;
+  color:          var(--text-muted);
+  text-transform: uppercase;
+  font-size:      0.8em;
+  letter-spacing: 0.06em;
+}
+.markdown-rendered tbody tr {
+  border-bottom: 1px solid var(--background-modifier-border);
+  transition:    background 0.1s ease;
+}
+.markdown-rendered tbody tr:hover {
+  background: var(--background-secondary-alt);
+}
+.markdown-rendered td {
+  padding: 0.5em 0.8em;
+}
+
+/* ── 标签 / Tag ──────────────────────────────────────────── */
+.tag {
+  background:    color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+  color:         var(--interactive-accent);
+  border:        1px solid color-mix(in srgb, var(--interactive-accent) 30%, transparent);
+  border-radius: 12px;
+  padding:       1px 9px;
+  font-size:     0.8em;
+  font-family:   var(--font-interface-theme);
+}
+.tag:hover {
+  background: color-mix(in srgb, var(--interactive-accent) 20%, transparent);
+}
+
+/* ── 高亮 ──────────────────────────────────────────────────── */
+.markdown-rendered mark {
+  background:    color-mix(in srgb, var(--interactive-accent) 22%, transparent);
+  color:         inherit;
+  padding:       0.05em 0.2em;
+  border-radius: 3px;
+}
+
+/* ── 侧边栏 & 文件树 ──────────────────────────────────────── */
+.nav-file-title,
+.nav-folder-title {
+  font-family:   var(--font-interface-theme);
+  font-size:     0.9em;
+  border-radius: 6px;
+  padding:       2px 8px;
+  transition:    background 0.12s ease;
+}
+.nav-file-title:hover,
+.nav-folder-title:hover {
+  background: var(--background-secondary-alt);
+}
+.nav-file-title.is-active {
+  background:  color-mix(in srgb, var(--interactive-accent) 15%, transparent);
+  color:       var(--interactive-accent);
+  font-weight: 500;
+}
+
+/* ── 搜索高亮 ─────────────────────────────────────────────── */
+.search-result-file-matched-text {
+  color:       var(--interactive-accent);
+  font-weight: 600;
+}
+
+/* ── 滚动条 ────────────────────────────────────────────────── */
+::-webkit-scrollbar             { width: 6px; height: 6px; }
+::-webkit-scrollbar-track       { background: transparent; }
+::-webkit-scrollbar-thumb       { background: var(--background-modifier-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+/* ── 光标 & 选中 ──────────────────────────────────────────── */
+.cm-cursor { border-left-color: var(--interactive-accent) !important; }
+.cm-selectionBackground,
+::selection { background: color-mix(in srgb, var(--interactive-accent) 20%, transparent) !important; }
+
+/* ── 当前行高亮 ──────────────────────────────────────────── */
+.markdown-source-view.mod-cm6 .cm-activeLine {
+  background: color-mix(in srgb, var(--interactive-accent) 5%, transparent);
+}
+
+/* ── 标题栏 ──────────────────────────────────────────────── */
+.titlebar,
+.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+  background:    var(--background-primary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* ── 弹出面板 ────────────────────────────────────────────── */
+.modal-container .modal {
+  border-radius: 12px;
+  border:        1px solid var(--background-modifier-border);
+  box-shadow:    0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Callout ─────────────────────────────────────────────── */
+.callout {
+  border-radius:     8px;
+  border-left-width: 3px;
+  padding:           0.9em 1.1em;
+  font-size:         0.95em;
+}
+.callout[data-callout="note"] {
+  background:        color-mix(in srgb, var(--interactive-accent) 8%, var(--background-primary));
+  border-left-color: var(--interactive-accent);
+}
+
+/* ── Frontmatter 属性面板 ────────────────────────────────── */
+.metadata-container {
+  background:    var(--background-secondary);
+  border:        1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  padding:       0.7em 1em;
+  margin-bottom: 1.5em;
+  font-size:     0.88em;
+  font-family:   var(--font-interface-theme);
+}
+
+/* ── 图片 ──────────────────────────────────────────────────── */
+.markdown-rendered img {
+  border-radius: 8px;
+  max-width:     100%;
+  display:       block;
+  margin:        1.5em auto;
+}
+
+/* ── 淡入动画 ────────────────────────────────────────────── */
+.markdown-rendered {
+  animation: fadeIn 0.18s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0.6; }
+  to   { opacity: 1;   }
+}
